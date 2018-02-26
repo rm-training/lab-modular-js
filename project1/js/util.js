@@ -10,3 +10,7 @@ function log(...args) {
 	// and maybe send it to my log system
 	logSystem.send('Console Log', ...args);
 }
+
+function cache(...args) {
+	// @todo cache it
+}

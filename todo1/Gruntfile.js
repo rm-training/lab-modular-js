@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 	                expand: true,
 	                cwd: 'public/js/vendor',
 	                src: ['**/*.js'],
-	                dest: 'dist/js/vendor/'
+	                dest: 'generated/js/vendor/'
 	            }]
 	        },
 	        dist: {
@@ -25,14 +25,41 @@ module.exports = function(grunt) {
 	                expand: true,
 	                cwd: 'public/js/',
 	                src: ['*.js'],
-	                dest: 'dist/js/'
+	                dest: 'generated/js/'
 	            }]
 	        }
 	    },
+	    uglify: {
+		    options: {
+		    	banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+		    		'<%= grunt.template.today("yyyy-mm-dd") %> */',
+				sourceMap: true,
+				mangle: {
+					// don't rename these
+					reserved: ['jQuery', 'Backbone']
+				}
+			},
+			app: {
+				files: {
+					'dist/js/all.min.js': ['generated/js/*.js']
+				}
+			},
+			vendor: {
+				files: {
+					'dist/js/vendor/all.min.js': ['generated/js/vendor/**/*.js']
+				}
+			}
+		},
 	    copy: {
-	    	html: {
+	    	generated: {
     			expand: true,
-    			cwd: 'public/',
+    			cwd: 'generated/',
+    			src: ['**/*.html'],
+    			dest: 'generated/'
+    		},
+    		dist: {
+    			expand: true,
+    			cwd: 'dist/',
     			src: ['**/*.html'],
     			dest: 'dist/'
     		},
@@ -46,6 +73,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['sayhi', 'jshint', 'babel', 'copy:html']);
+    grunt.registerTask('default', [
+    	'sayhi',
+    	'jshint',
+    	'babel',
+    	'uglify',
+    	'copy'
+	]);
 };

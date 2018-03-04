@@ -94,6 +94,8 @@
                     }
 
                     // validate
+                    console.log('Validating');
+
                     if (!todoItem.title) {
                         isValid = false;
                         $todoForm
@@ -119,7 +121,6 @@
                     if (!isValid) {
                         return;
                     }
-
 
                     console.log('Item about to be added:', todoItem);
 

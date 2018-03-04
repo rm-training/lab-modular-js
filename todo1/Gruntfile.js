@@ -6,17 +6,19 @@ module.exports = function(grunt) {
 	        options: {
 	            sourceMap: true
 	        },
+	        vendor: {
+	        	files: [{
+	                expand: true,
+	                cwd: 'public/js/vendor',
+	                src: ['**/*.js'],
+	                dest: 'public/dist/js/vendor/'
+	            }]
+	        },
 	        dist: {
-	        	// concat to one file
-	            // files: [{
-	            //     "src": ["public/js/**/*.js"],
-	            //     "dest": ["public/dist/all.js"],
-	            // }],
-            	// dynamic mapping to get it to expand
 	            files: [{
 	                expand: true,
 	                cwd: 'public/js/',
-	                src: ['**/*.js'],
+	                src: ['*.js'],
 	                dest: 'public/dist/js/'
 	            }]
 	        }

@@ -1,6 +1,6 @@
-'use strict';
-
 $(function() {
+    "use strict";
+
     console.log('Hello World');
 
     const $todoForm = $('#todo-form');
@@ -18,7 +18,7 @@ $(function() {
             title: $todoForm.find('input[name=title]').val(),
             description: $todoForm.find('input[name=description]').val(),
             isUrgent: $todoForm.find('input[name="is-urgent"]').val()
-        }
+        };
 
         // validate
         console.log('Validating');

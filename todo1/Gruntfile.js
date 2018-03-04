@@ -2,6 +2,12 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		jshint: {
+			options: {
+				esversion: 6,
+			},
+			all: ['Gruntfile.js', 'public/js/*.js']
+		},
 	    babel: {
 	        options: {
 	            sourceMap: true
@@ -39,6 +45,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-babel');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask("default", ["sayhi", "babel", "copy:html"]);
+    grunt.registerTask('default', ['sayhi', 'jshint', 'babel', 'copy:html']);
 };

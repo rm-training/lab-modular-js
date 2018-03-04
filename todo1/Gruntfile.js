@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	require('jit-grunt')(grunt);
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		jshint: {
@@ -73,12 +75,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('sayhi', 'Say hello.', function() {
 		grunt.log.write('Hello!').ok();
 	});
-
-    grunt.loadNpmTasks('grunt-babel');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.registerTask('default', [
     	'sayhi',

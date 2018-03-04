@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 	                dest: 'generated/js/vendor/'
 	            }]
 	        },
-	        dist: {
+	        app: {
 	            files: [{
 	                expand: true,
 	                cwd: 'public/js/',
@@ -72,13 +72,34 @@ module.exports = function(grunt) {
 		  generated: ['generated'],
 		  dist: ['dist']
 		},
+		watch: {
+			scripts: {
+				files: ['public/js/**/*.js'],
+				tasks: ['generate'],
+				options: {
+					spawn: false, // faster when turned off
+				},
+			},
+		}
 	});
 
-    grunt.registerTask('default', [
-    	'sayhi',
+	// generate the built javascript for dev
+	grunt.registerTask('generate', [
     	'jshint',
     	'babel',
+    	'copy:generated'
+	]);
+
+	// build the distribution files
+	grunt.registerTask('build', [
+    	'generate',
     	'uglify',
     	'copy'
+	]);
+
+	// generate and watch
+    grunt.registerTask('default', [
+    	'generate',
+    	'watch'
 	]);
 };

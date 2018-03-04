@@ -1,7 +1,7 @@
 $(function() {
     "use strict";
 
-    console.log('Hello World');
+    console.log('Hello World!');
 
     const $todoForm = $('#todo-form');
     const $todoItemList = $('#todo-items');

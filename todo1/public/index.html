@@ -24,7 +24,7 @@
                     <h1>Stuff to do!</h1>
 
                     <div class="card bg-light">
-                        <form class="card-body">
+                        <form id="todo-form" class="card-body" novalidate>
                           <div class="form-group">
                             <label for="todo-title">Title</label>
                             <input name="title" type="text" class="form-control" id="todo-title" placeholder="Title">
@@ -35,7 +35,7 @@
                           </div>
                           <div class="checkbox">
                             <label>
-                              <input type="checkbox"> Urgent
+                              <input type="checkbox" name="is-urgent" value="1"> Urgent
                             </label>
                           </div>
                           <button type="submit" class="btn btn-primary">Add</button>
@@ -47,19 +47,20 @@
             <div class="row justify-content-md-center">
                 <div class="col-md-4">
 
-                    <div class="list-group">
+                    <ul id="todo-items">
+                    </ul>
+                    <!-- <div class="list-group">
 
-                      <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1">List group item heading</h5>
                           <small>3 days ago</small>
                         </div>
                         <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
                         <small>Donec id elit non mi porta.</small>
-                      </a> -->
+                      </a>
 
-
-                    </div>
+                    </div>-->
 
                 </div>
             </div>
@@ -71,14 +72,66 @@
 
         <script>
 
-            function getTodos() {
-                // ajax it
-            }
+            'use strict';
 
             $(function() {
                 // start building stuff
 
                 console.log('Hello World');
+
+                const $todoForm = $('#todo-form');
+                const $todoItemList = $('#todo-items');
+
+                $todoForm.on('submit', (e) => {
+                    e.preventDefault();
+
+                    // create a new todo item in the list
+                    let isValid = false;
+                    const todoItem = {
+                        title: $todoForm.find('input[name=title]').val(),
+                        description: $todoForm.find('input[name=description]').val(),
+                        isUrgent: $todoForm.find('input[name="is-urgent"]').val()
+                    }
+
+                    // validate
+                    if (!todoItem.title) {
+                        isValid = false;
+                        $todoForm
+                            .find('input[name=title]')
+                            .addClass('is-invalid')
+                            .parent()
+                            .append(
+                                '<div class="invalid-feedback">Please give a title.</div>'
+                            );
+                    }
+
+                    if (!todoItem.description) {
+                        isValid = false;
+                        $todoForm
+                            .find('input[name=description]')
+                            .addClass('is-invalid')
+                            .parent()
+                            .append(
+                                '<div class="invalid-feedback">Please give a description.</div>'
+                            );
+                    }
+
+                    if (!isValid) {
+                        return;
+                    }
+
+
+                    console.log('Item about to be added:', todoItem);
+
+                    // add it into the markup
+
+                    $todoItemList.append(`<li>${todoItem.title}</li>`);
+
+                    // @todo save it to the database
+
+                    // clear the form
+                    $todoForm.trigger('reset');
+                });
 
 
             });

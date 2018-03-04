@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx http-server -p 8060",
+    "build": "npx babel public/js -d public/dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

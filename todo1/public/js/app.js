@@ -21,7 +21,7 @@ $(function() {
         };
 
         // validate
-        console.log('Validating');
+        console.log('Validating...');
 
         if (!todoItem.title) {
             isValid = false;

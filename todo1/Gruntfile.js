@@ -85,8 +85,8 @@ module.exports = function(grunt) {
 
 	// generate the built javascript for dev
 	grunt.registerTask('generate', [
-    	'jshint',
-    	'babel',
+    	'newer:jshint',
+    	'newer:babel',
     	'copy:generated'
 	]);
 

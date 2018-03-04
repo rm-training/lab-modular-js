@@ -1,6 +1,8 @@
 module.exports = function(grunt) {
 
-	require('jit-grunt')(grunt);
+	require('jit-grunt')(grunt)({
+		customTasksDir: 'tasks'
+	});
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -70,10 +72,6 @@ module.exports = function(grunt) {
 		  generated: ['generated'],
 		  dist: ['dist']
 		},
-	});
-
-	grunt.registerTask('sayhi', 'Say hello.', function() {
-		grunt.log.write('Hello!').ok();
 	});
 
     grunt.registerTask('default', [

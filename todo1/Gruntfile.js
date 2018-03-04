@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 	                expand: true,
 	                cwd: 'public/js/vendor',
 	                src: ['**/*.js'],
-	                dest: 'public/dist/js/vendor/'
+	                dest: 'dist/js/vendor/'
 	            }]
 	        },
 	        dist: {
@@ -19,9 +19,17 @@ module.exports = function(grunt) {
 	                expand: true,
 	                cwd: 'public/js/',
 	                src: ['*.js'],
-	                dest: 'public/dist/js/'
+	                dest: 'dist/js/'
 	            }]
 	        }
+	    },
+	    copy: {
+	    	html: {
+    			expand: true,
+    			cwd: 'public/',
+    			src: ['**/*.html'],
+    			dest: 'dist/'
+    		},
 	    }
 	});
 
@@ -30,6 +38,7 @@ module.exports = function(grunt) {
 	});
 
     grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask("default", ["sayhi", "babel"]);
+    grunt.registerTask("default", ["sayhi", "babel", "copy:html"]);
 };

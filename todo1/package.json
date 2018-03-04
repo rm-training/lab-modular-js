@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx http-server -p 8060",
-    "build": "npx babel public/js -d public/dist",
+    "start:dev": "npx http-server public -p 8060",
+    "start:dist": "npx http-server dist -p 8060",
+    "build": "npx babel public/js -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +17,7 @@
     "grunt": "^1.0.2",
     "grunt-babel": "^7.0.0",
     "grunt-cli": "^1.2.0",
+    "grunt-contrib-copy": "^1.0.0",
     "http-server": "^0.11.1"
   },
   "dependencies": {

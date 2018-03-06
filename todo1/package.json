@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "npx http-server public -p 8060",
+    "start:generated": "npx http-server generated -p 8060",
     "start:dist": "npx http-server dist -p 8060",
     "build": "npx babel public/js -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +20,7 @@
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^2.2.1",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",

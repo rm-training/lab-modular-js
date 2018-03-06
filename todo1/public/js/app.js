@@ -1,6 +1,4 @@
-$(function() {
-    "use strict";
-
+function app() {
     console.log('Hello World!');
 
     const $todoForm = $('#todo-form');
@@ -60,5 +58,6 @@ $(function() {
         // clear the form
         $todoForm.trigger('reset');
     });
+}
 
-});
+$(app);

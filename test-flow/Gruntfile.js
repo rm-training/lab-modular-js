@@ -11,11 +11,15 @@ module.exports = function(grunt) {
 		},
 		babel: {
 			options: {
-				sourceMap: true
+				sourceMap: true // or "inline"
 			},
 			build: {
-				src: 'testfile.js',
-				dest: 'testfile-out.js'
+				files: [{
+				    expand: true,
+				    cwd: 'js/', // must be a string!
+				    src: ['*.js'],
+				    dest: 'generated/js'
+				}]
 			}
 		}
 	};

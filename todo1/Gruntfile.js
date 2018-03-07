@@ -65,6 +65,9 @@ module.exports = function(grunt) {
 					includeSources: true
 				},
 				mangle: false
+				/*  mangle: {
+			        reserved: ['jQuery', 'Backbone']
+			      }*/
 			},
 			app: {
 				files: {

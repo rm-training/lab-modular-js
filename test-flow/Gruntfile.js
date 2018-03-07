@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+	require('load-grunt-tasks')(grunt);
+
 	const config = {
 		jshint: {
 			options: {
@@ -45,12 +47,6 @@ module.exports = function(grunt) {
 			},
 		},
 	};
-
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-babel');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig(config);
 

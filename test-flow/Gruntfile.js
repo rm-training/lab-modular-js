@@ -31,17 +31,32 @@ module.exports = function(grunt) {
 	    			dest: 'generated/'
 	    		}]
 			}
-		}
+		},
+		clean: {
+		  generated: ['generated']
+		},
+		watch: {
+			src: {
+				files: ['js/**/*.js'],
+				tasks: ['default'],
+				options: {
+					spawn: false, // faster when turned off
+				},
+			},
+		},
 	};
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-babel');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig(config);
 
 	grunt.registerTask('default', [
 		'jshint',
-		'babel'
+		'babel',
+		'watch'
 	]);
 };

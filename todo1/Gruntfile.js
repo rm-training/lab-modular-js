@@ -138,7 +138,17 @@ module.exports = function(grunt) {
 					spawn: false, // faster when turned off
 				},
 			},
-		}
+		},
+		processhtml: {
+		    options: {
+		      // Task-specific options go here.
+		    },
+		    build: {
+		    	files: {
+		    		'dist/index.html': ['public/index.html']
+		    	}
+		    },
+		  },
 	});
 
 	grunt.registerTask('dev', [
@@ -160,7 +170,8 @@ module.exports = function(grunt) {
     	'generate',
     	'cssmin:dist',
     	'uglify',
-    	'copy'
+    	'copy',
+    	'processhtml'
 	]);
 
 	// generate and watch

@@ -21,11 +21,22 @@ module.exports = function(grunt) {
 				    dest: 'generated/js'
 				}]
 			}
+		},
+		copy: {
+			build: {
+				files: [{
+					expand: true,
+	    			cwd: 'public/',
+	    			src: ['**/*.html'],
+	    			dest: 'generated/'
+	    		}]
+			}
 		}
 	};
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-babel');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	grunt.initConfig(config);
 

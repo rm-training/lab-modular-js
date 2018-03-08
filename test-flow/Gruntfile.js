@@ -52,6 +52,24 @@ module.exports = function(grunt) {
 				},
 			},
 		},
+		uglify: {
+			options: {
+				// banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+				// 	'<%= grunt.template.today("yyyy-mm-dd") %> */',
+				sourceMap: {
+					includeSources: true
+				},
+				mangle: true
+			},
+			dist: {
+				files: {
+					'dist/js/all.min.js': [
+						'generated/js/testfile.js',
+						'generated/js/testfile2.js'
+					]
+				}
+			},
+		}
 	};
 
 	grunt.initConfig(config);

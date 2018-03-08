@@ -2,6 +2,12 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	const config = {
+		files: {
+			js: [
+				'js/testfile.js',
+				'js/testfile2.js'
+			]
+		},
 		jshint: {
 			options: {
 				esversion: 6,
@@ -39,7 +45,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			src: {
-				files: ['js/**/*.js'],
+				files: ['<%= files.js %>'],
 				tasks: ['default'],
 				options: {
 					spawn: false, // faster when turned off

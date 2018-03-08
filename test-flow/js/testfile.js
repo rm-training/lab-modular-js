@@ -1,2 +1,2 @@
 console.log(this);
-console.log('hi');
+console.log('h');

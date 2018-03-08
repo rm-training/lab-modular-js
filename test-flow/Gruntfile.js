@@ -4,8 +4,8 @@ module.exports = function(grunt) {
 	const config = {
 		files: {
 			js: [
-				'js/testfile.js',
-				'js/testfile2.js'
+				'public/js/testfile.js',
+				'public/js/testfile2.js'
 			]
 		},
 		jshint: {
@@ -24,14 +24,22 @@ module.exports = function(grunt) {
 			build: {
 				files: [{
 				    expand: true,
-				    cwd: 'js/', // must be a string!
+				    cwd: 'public/js/', // must be a string!
 				    src: ['*.js'],
 				    dest: 'generated/js'
 				}]
 			}
 		},
 		copy: {
-			build: {
+			generated: {
+				files: [{
+					expand: true,
+	    			cwd: 'public/',
+	    			src: ['**/*.html'],
+	    			dest: 'generated/'
+	    		}]
+			},
+			dist: {
 				files: [{
 					expand: true,
 	    			cwd: 'public/',
@@ -41,7 +49,8 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: {
-		  generated: ['generated']
+		  generated: ['generated'],
+		  dist: ['dist']
 		},
 		watch: {
 			src: {
@@ -69,6 +78,13 @@ module.exports = function(grunt) {
 					]
 				}
 			},
+		},
+		processhtml: {
+		    build: {
+		    	files: {
+		    		'dist/index.html': ['public/index.html']
+		    	}
+		    },
 		}
 	};
 
@@ -78,5 +94,13 @@ module.exports = function(grunt) {
 		'jshint',
 		'babel',
 		'watch'
+	]);
+
+	grunt.registerTask('build', [
+		'clean',
+		'babel',
+		'copy',
+		'uglify',
+		'processhtml'
 	]);
 };

@@ -1,13 +1,10 @@
+const webpackConfig = require('./webpack.config');
+const path = require('path');
+
 module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	const config = {
-		files: {
-			js: [
-				'public/js/testfile.js',
-				'public/js/testfile2.js'
-			]
-		},
 		server: {
 			base: 'generated/',
 			port: 8312
@@ -27,10 +24,7 @@ module.exports = function(grunt) {
 			},
 			build: {
 				files: [{
-				    expand: true,
-				    cwd: 'public/js/', // must be a string!
-				    src: ['*.js'],
-				    dest: 'generated/js'
+					'generated/js/bundle.js': 'generated/js/bundle.js'
 				}]
 			}
 		},
@@ -58,7 +52,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			src: {
-				files: ['<%= files.js %>', 'public/**/*.html'],
+				files: ['public/js/**/*.js', 'public/**/*.html'],
 				tasks: ['generate'],
 				options: {
 					livereload: 35729,
@@ -78,19 +72,38 @@ module.exports = function(grunt) {
 			dist: {
 				files: {
 					'dist/js/all.min.js': [
-						'generated/js/testfile.js',
-						'generated/js/testfile2.js'
+						'generated/js/all.js',
 					]
 				}
 			},
 		},
 		processhtml: {
-		    build: {
+		    generated: {
 		    	files: {
-		    		'dist/index.html': ['public/index.html']
+		    		'generated/index.html': ['public/index.html']
 		    	}
 		    },
-		}
+		    dist: {
+		    	files: {
+		    		'dist/index.html': ['generated/index.html']
+		    	}
+		    },
+		},
+		webpack: {
+			options: {
+				stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+			},
+			generated: Object.assign({}, {
+				mode: 'development',
+				entry: './public/js/app.js',
+				output: {
+					filename: 'all.js',
+					path: path.resolve(__dirname, 'generated/js')
+				},
+				devtool: 'inline-source-map',
+				watch: false // or true
+			})
+	    }
 	};
 
 	grunt.loadTasks('tasks');
@@ -105,8 +118,10 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('generate', [
 		'jshint',
+		'webpack',
 		'babel',
-		'copy:generated'
+		'copy:generated',
+		'processhtml:generated'
 	]);
 
 	grunt.registerTask('build', [
@@ -114,6 +129,6 @@ module.exports = function(grunt) {
 		'babel',
 		'copy',
 		'uglify',
-		'processhtml'
+		'processhtml:dist'
 	]);
 };

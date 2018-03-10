@@ -3,6 +3,7 @@ require.config({
 	baseUrl: 'js',
 	// additional modules that may not be in my baseUrl
 	// or may not be defined 'with/path/names' in module name
+	// note: paths fallback is not supported by optimizer
     paths: {
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min'
     }

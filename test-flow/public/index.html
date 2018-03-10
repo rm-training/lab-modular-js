@@ -5,24 +5,29 @@
 
 	<h1>Hello world!</h1>
 
-	<!-- build:js js/all.min.js -->
 
-	<!-- let requirejs do it all -->
+	<!-- let requirejs do it all (with data-main attribute) -->
 	<script data-main="js/app" src="js/require.js"></script>
 
-	<!-- or just load my entry point
-	<script src="js/require.js"></script>
+	<!-- build:js js/vendor.min.js -->
+
+	<!-- /build -->
+
+	<!-- build:js js/app.min.js -->
+
+	<!-- alternative load pattern for require: or just load my entry point
 	<script src="js/app.js"></script>-->
 
-	<!-- or specify all
-	<script src="js/require.js"></script>
+	<!-- alternative load pattern for require:  or specify all
 	<script src="js/testfile.js"></script>
 	<script src="js/testfile2.js"></script>
 	<script src="js/app.js"></script> -->
 
     <!-- /build -->
 
+    <!-- build:remove -->
     <script src="http://localhost:35729/livereload.js"></script>
+	<!-- /build -->
 
 </body>
 </html>

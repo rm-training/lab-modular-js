@@ -72,30 +72,68 @@ module.exports = function(grunt) {
 				},
 			},
 		},
-		uglify: {
-			options: {
-				// banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-				// 	'<%= grunt.template.today("yyyy-mm-dd") %> */',
-				sourceMap: {
-					includeSources: true
-				},
-				mangle: true
-			},
-			dist: {
-				files: {
-					'dist/js/all.min.js': [
-						'generated/js/testfile.js',
-						'generated/js/testfile2.js'
-					]
-				}
-			},
-		},
 		processhtml: {
 		    build: {
 		    	files: {
 		    		'dist/index.html': ['public/index.html']
 		    	}
 		    },
+		},
+		requirejs: {
+			compile: {
+				options: {
+					// appDir: "generated/",
+					baseUrl: "generated/js",
+
+					// to uglify or not
+					optimize: 'uglify2', // uglify | uglify2
+
+					// override our configs
+					// r.js doesn't support fallbacks
+					paths: {
+						jquery: 'jquery'
+					},
+
+					// location of our configration
+					mainConfigFile:'generated/js/app.js',
+
+					// which modules will be "optimized"?
+					// we can set 'name' if we aren't going to
+					// name: 'app',
+					// and it will bundle it all into ^ app
+					// separate out bundles of modules like here
+					modules:[
+						{
+							name: 'vendor.min',
+							create: true,
+							include: ['jquery']
+						},
+						{
+							name: 'app.min',
+							create: true,
+							include: 'app',
+							exclude: ['vendor.min'],
+						}
+					],
+					generateSourceMaps: true,
+					logLevel: 0,
+
+					// add IIFE wrappers
+					// wrap: true
+
+
+					// for single file output
+					//name: 'app',
+					//out: "dist/js/optimized.js",
+					// include: [ "app.js" ],
+
+					// for multiple file output
+					dir: "dist/js",
+
+					// clean up files that are later bundled
+					removeCombined: true,
+				}
+			}
 		}
 	};
 
@@ -120,7 +158,7 @@ module.exports = function(grunt) {
 		'jshint',
 		'babel',
 		'copy',
-		'uglify',
+		'requirejs',
 		'processhtml'
 	]);
 };

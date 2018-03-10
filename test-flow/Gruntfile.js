@@ -67,6 +67,7 @@ module.exports = function(grunt) {
 				stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 			},
 			generated: Object.assign({}, webpackConfig, {
+				plugins: [],
 				mode: 'development',
 				entry: './public/js/app.js',
 				output: {
@@ -109,7 +110,6 @@ module.exports = function(grunt) {
 		'clean',
 		'webpack',
 		'copy',
-		'uglify',
 		'processhtml'
 	]);
 };

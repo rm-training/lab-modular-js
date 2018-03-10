@@ -9,8 +9,14 @@ module.exports = function(grunt) {
 			]
 		},
 		server: {
-			base: 'generated/',
-			port: 8312
+			generated: {
+				base: 'generated/',
+				port: 8312
+			},
+			dist: {
+				base: 'dist/',
+				port: 8313
+			}
 		},
 		jshint: {
 			options: {
@@ -99,7 +105,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', [
 		'generate',
-		'server',
+		'server:generated',
 		'watch'
 	]);
 
@@ -111,6 +117,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('build', [
 		'clean',
+		'jshint',
 		'babel',
 		'copy',
 		'uglify',

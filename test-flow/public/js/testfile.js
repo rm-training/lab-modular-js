@@ -1,4 +1,4 @@
-(function() {
+define('testfile', ['testfile2'], function(mod2) {
 	let a = 1;
 	console.group('Test file 1!');
 	console.log('I am test file 1');
@@ -16,4 +16,4 @@
 	mod2.init();
 
 	console.groupEnd();
-})();
+});

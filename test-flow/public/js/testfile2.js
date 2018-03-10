@@ -1,4 +1,4 @@
-const mod2 = (function() {
+define('testfile2', function() {
 	let a = 10;
 	let b = 20;
 	console.group('Test file 2');
@@ -22,4 +22,4 @@ const mod2 = (function() {
 		},
 		reload: reload
 	};
-})();
+});

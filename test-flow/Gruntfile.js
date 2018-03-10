@@ -42,12 +42,20 @@ module.exports = function(grunt) {
 		},
 		copy: {
 			generated: {
-				files: [{
-					expand: true,
-	    			cwd: 'public/',
-	    			src: ['**/*.html'],
-	    			dest: 'generated/'
-	    		}]
+				files: [
+					{
+						expand: true,
+		    			cwd: 'public/',
+		    			src: ['**/*.html'],
+		    			dest: 'generated/'
+		    		},
+		    		{
+						expand: true,
+		    			cwd: 'public/js/vendor',
+		    			src: ['**/*'],
+		    			dest: 'generated/js/vendor'
+		    		}
+	    		]
 			},
 			dist: {
 				files: [{
@@ -91,7 +99,7 @@ module.exports = function(grunt) {
 					// override our configs
 					// r.js doesn't support fallbacks
 					paths: {
-						jquery: 'jquery'
+						jquery: 'vendor/jquery'
 					},
 
 					// location of our configration
@@ -104,7 +112,7 @@ module.exports = function(grunt) {
 					// separate out bundles of modules like here
 					modules:[
 						{
-							name: 'vendor.min',
+							name: 'vendor/all.min',
 							create: true,
 							include: ['jquery']
 						},
@@ -112,7 +120,7 @@ module.exports = function(grunt) {
 							name: 'app.min',
 							create: true,
 							include: 'app',
-							exclude: ['vendor.min'],
+							exclude: ['vendor/all.min'],
 						}
 					],
 					generateSourceMaps: true,

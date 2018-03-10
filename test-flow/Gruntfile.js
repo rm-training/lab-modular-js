@@ -18,16 +18,6 @@ module.exports = function(grunt) {
 				'public/js/*.js'
 			]
 		},
-		babel: {
-			options: {
-				sourceMap: true // or "inline"
-			},
-			build: {
-				files: [{
-					'generated/js/bundle.js': 'generated/js/bundle.js'
-				}]
-			}
-		},
 		copy: {
 			generated: {
 				files: [{
@@ -60,23 +50,6 @@ module.exports = function(grunt) {
 				},
 			},
 		},
-		uglify: {
-			options: {
-				// banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-				// 	'<%= grunt.template.today("yyyy-mm-dd") %> */',
-				sourceMap: {
-					includeSources: true
-				},
-				mangle: true
-			},
-			dist: {
-				files: {
-					'dist/js/all.min.js': [
-						'generated/js/all.js',
-					]
-				}
-			},
-		},
 		processhtml: {
 		    generated: {
 		    	files: {
@@ -93,7 +66,7 @@ module.exports = function(grunt) {
 			options: {
 				stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
 			},
-			generated: Object.assign({}, {
+			generated: Object.assign({}, webpackConfig, {
 				mode: 'development',
 				entry: './public/js/app.js',
 				output: {
@@ -102,6 +75,15 @@ module.exports = function(grunt) {
 				},
 				devtool: 'inline-source-map',
 				watch: false // or true
+			}),
+			dist: Object.assign({}, webpackConfig, {
+				mode: 'production',
+				entry: './public/js/app.js',
+				output: {
+					filename: 'all.min.js',
+					path: path.resolve(__dirname, 'dist/js')
+				},
+				devtool: 'inline-source-map'
 			})
 	    }
 	};
@@ -118,17 +100,16 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('generate', [
 		'jshint',
-		'webpack',
-		'babel',
+		'webpack:generated',
 		'copy:generated',
 		'processhtml:generated'
 	]);
 
 	grunt.registerTask('build', [
 		'clean',
-		'babel',
+		'webpack',
 		'copy',
 		'uglify',
-		'processhtml:dist'
+		'processhtml'
 	]);
 };

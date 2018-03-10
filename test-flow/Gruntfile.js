@@ -8,6 +8,10 @@ module.exports = function(grunt) {
 				'public/js/testfile2.js'
 			]
 		},
+		server: {
+			base: 'generated/',
+			port: 8312
+		},
 		jshint: {
 			options: {
 				esversion: 6,
@@ -87,6 +91,8 @@ module.exports = function(grunt) {
 		    },
 		}
 	};
+
+	grunt.loadTasks('tasks');
 
 	grunt.initConfig(config);
 

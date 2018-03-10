@@ -4,7 +4,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('server', 'static file dev server', function() {
 		// tell grunt this task is asynchronous
-		const done = this.async();
+		// but this will never release the task
+		// so if I'm stacking "server" with "watch" I should comment this out
+		//const done = this.async();
 
 		const app = express();
 		const port = grunt.config.get('server.port') || 8000;

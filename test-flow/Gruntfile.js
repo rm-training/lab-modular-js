@@ -58,9 +58,10 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			src: {
-				files: ['<%= files.js %>'],
-				tasks: ['default'],
+				files: ['<%= files.js %>', 'public/**/*.html'],
+				tasks: ['generate'],
 				options: {
+					livereload: 35729,
 					spawn: false, // faster when turned off
 				},
 			},
@@ -97,9 +98,15 @@ module.exports = function(grunt) {
 	grunt.initConfig(config);
 
 	grunt.registerTask('default', [
+		'generate',
+		'server',
+		'watch'
+	]);
+
+	grunt.registerTask('generate', [
 		'jshint',
 		'babel',
-		'watch'
+		'copy:generated'
 	]);
 
 	grunt.registerTask('build', [

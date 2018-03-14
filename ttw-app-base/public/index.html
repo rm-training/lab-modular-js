@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Time to Weekend app</title>
+
+    <!-- Vendor styles -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- App styles -->
+    <link href="styles/app.css" rel="stylesheet">
+
+  </head>
+
+  <body class="text-center">
+
+    <div class="floating-box">
+      <div class="mb-4 large-emoji-icon">
+        😪
+      </div>
+
+      <h1 class="h3 mb-3 font-weight-normal">Time until the weekend</h1>
+
+      <a href="#" class="btn btn-lg btn-primary btn-block">Tell me</a>
+
+      <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+    </div>
+
+    <!-- vendor scripts -->
+    <script type="text/javascript" src="vendor/moment.js"></script>
+
+    <!-- app scripts -->
+    <script>
+
+      function logger(...args) {
+        console.log(args);
+      }
+
+      function logFormatted(...args) {
+        console.group('Logger here...');
+        console.log(args);
+        console.groupEnd();
+      }
+
+      function logGrouped(...args) {
+        console.group('Logger here...');
+        args.forEach(function(el) {
+          logger(el);
+        });
+        console.groupEnd();
+      }
+
+      const button = document.querySelector('.btn-primary');
+
+      button.addEventListener('click', () => {
+        logFormatted('Checking for weekend');
+
+        let weekend = moment().day(6);
+
+        let daysUntil = weekend.format('DD-MMM-YYYY');
+        let timeUntil = weekend.fromNow();
+        let inSeconds = weekend.diff(moment(), 'seconds');
+
+        logGrouped(weekend, timeUntil, inSeconds);
+
+        button.innerHTML = timeUntil;
+      });
+
+    </script>
+
+  </body>
+</html>

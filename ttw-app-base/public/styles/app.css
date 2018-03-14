@@ -28,3 +28,8 @@ body {
   padding: 15px;
   margin: 0 auto;
 }
+
+.back-to-work-button {
+  transition-property: all;
+  transition-duration: 1s;
+}

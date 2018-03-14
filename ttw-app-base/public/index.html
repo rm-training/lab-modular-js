@@ -25,7 +25,7 @@
 
       <h1 class="h3 mb-3 font-weight-normal">Time until the weekend</h1>
 
-      <a href="#" class="btn btn-lg btn-primary btn-block">Tell me</a>
+      <a href="#" class="btn btn-lg btn-primary btn-block back-to-work-button">Tell me</a>
 
       <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </div>
@@ -36,15 +36,19 @@
     <!-- app scripts -->
     <script>
 
+      const config = {
+        resetTimer: 5000
+      };
+
       function logger(...args) {
         console.log(args);
-      }
+      };
 
       function logFormatted(...args) {
         console.group('Logger here...');
         console.log(args);
         console.groupEnd();
-      }
+      };
 
       function logGrouped(...args) {
         console.group('Logger here...');
@@ -52,7 +56,7 @@
           logger(el);
         });
         console.groupEnd();
-      }
+      };
 
       const button = document.querySelector('.btn-primary');
 
@@ -68,7 +72,17 @@
         logGrouped(weekend, timeUntil, inSeconds);
 
         button.innerHTML = timeUntil;
+        button.classList.remove('btn-primary');
+        button.classList.add('btn-secondary');
+
+        setTimeout(resetButton, config.resetTimer);
       });
+
+      function resetButton() {
+        button.innerHTML = 'Back to work';
+        button.classList.remove('btn-secondary');
+        button.classList.add('btn-primary');
+      }
 
     </script>
 

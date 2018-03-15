@@ -4,28 +4,40 @@ module.exports = function(grunt) {
       options: {
         esversion: 6
       },
-      src: [
-        'Gruntfile.js',
-        'public/scripts/*.js'
-      ]
+      src: ["Gruntfile.js", "public/scripts/*.js"]
     },
     babel: {
       options: {
-        sourceMaps: 'inline'
+        sourceMaps: "inline"
       },
       generated: {
-        files: [{
-          expand: true, // enables most dyn. stuff
-          cwd: 'public/scripts/', // must be a string!
-          src: ['*.js'],
-          dest: 'generated/scripts'
-        }]
+        files: [
+          {
+            expand: true, // enables most dyn. stuff
+            cwd: "public/scripts/", // must be a string!
+            src: ["*.js"],
+            dest: "generated/scripts"
+          }
+        ]
+      }
+    },
+    copy: {
+      generated: {
+        files: [
+          {
+            expand: true,
+            cwd: "public/",
+            src: ["**/*", "!scripts/*"],
+            dest: "generated/"
+          }
+        ]
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks("grunt-contrib-jshint");
+  grunt.loadNpmTasks("grunt-babel");
+  grunt.loadNpmTasks("grunt-contrib-copy");
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask("default", ["jshint", "babel", "copy"]);
 };

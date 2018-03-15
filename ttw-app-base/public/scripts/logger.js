@@ -3,7 +3,7 @@
  */
 function logger(...args) {
   console.log(args);
-};
+}
 
 /**
  * @param  {...array}
@@ -12,7 +12,7 @@ function logFormatted(...args) {
   console.group('Logger here...');
   console.log(args);
   console.groupEnd();
-};
+}
 
 /**
  * @param  {...array}
@@ -23,4 +23,4 @@ function logGrouped(...args) {
     logger(el);
   });
   console.groupEnd();
-};
+}

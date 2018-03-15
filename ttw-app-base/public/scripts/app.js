@@ -1,5 +1,7 @@
 const todayMoment = moment();
 
+console.log('Live reload ftw');
+
 const emotions = [
   '😪', // sunday or default
   '💀', // monday

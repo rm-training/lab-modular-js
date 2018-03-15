@@ -34,7 +34,15 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      generated: ['generated']
+      generated: ["generated"]
+    },
+    watch: {
+      files: ["public/scripts/*.js"],
+      tasks: ["generate"],
+      options: {
+        livereload: 35729,
+        spawn: false // faster but error-prone
+      }
     }
   });
 
@@ -42,6 +50,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks("grunt-contrib-watch");
 
-  grunt.registerTask("default", ["jshint", "babel", "copy"]);
+  grunt.registerTask("generate", ["jshint", "babel", "copy"]);
+  grunt.registerTask("working", ["generate", "watch"]);
+
+  grunt.registerTask("default", ["generate"]);
 };

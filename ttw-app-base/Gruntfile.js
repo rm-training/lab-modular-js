@@ -48,7 +48,7 @@ module.exports = function(grunt) {
       dist: ["dist"]
     },
     watch: {
-      files: ["public/scripts/*.js"],
+      files: ["public/scripts/*.js", "public/*.html"],
       tasks: ["generate"],
       options: {
         livereload: 35729,
@@ -77,7 +77,14 @@ module.exports = function(grunt) {
           ]
         }
       }
-    }
+    },
+    processhtml: {
+      dist: {
+        files: {
+          'dist/index.html': ['generated/index.html']
+        }
+      },
+    },
   });
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -86,9 +93,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-uglify");
+  grunt.loadNpmTasks("grunt-processhtml");
 
-  grunt.registerTask("generate", ["clean:generated", "jshint", "babel", "copy:generated"]);
+  grunt.registerTask("generate", [
+    "clean:generated",
+    "jshint",
+    "babel",
+    "copy:generated"
+  ]);
   grunt.registerTask("working", ["generate", "watch"]);
-  grunt.registerTask("dist", ["generate", "clean:dist", "copy:dist", "uglify:dist"]);
-  grunt.registerTask("default", ["generate"]);
+  grunt.registerTask("dist", [
+    "generate",
+    "clean:dist",
+    "copy:dist",
+    "processhtml:dist",
+    "uglify:dist"
+  ]);
+grunt.registerTask("default", ["generate"]);
 };

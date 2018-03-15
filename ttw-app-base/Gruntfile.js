@@ -31,10 +31,21 @@ module.exports = function(grunt) {
             dest: "generated/"
           }
         ]
+      },
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: "generated/",
+            src: ["**/*", "!scripts/*", "!vendor/**/*.js"],
+            dest: "dist/"
+          }
+        ]
       }
     },
     clean: {
-      generated: ["generated"]
+      generated: ["generated"],
+      dist: ["dist"]
     },
     watch: {
       files: ["public/scripts/*.js"],
@@ -42,6 +53,29 @@ module.exports = function(grunt) {
       options: {
         livereload: 35729,
         spawn: false // faster but error-prone
+      }
+    },
+    uglify: {
+      dist: {
+        options: {
+          sourceMap: {
+            includeSources: true
+          },
+          mangle: true
+        },
+        files: {
+          'dist/scripts/all.min.js': [
+            // won't cut it because of script dependencies & ordering
+            // generated/scripts/**/*.js'
+            'generated/scripts/logger.js',
+            'generated/scripts/app.js'
+          ],
+          'dist/vendor/all.min.js': [
+            // bootstrap wants jquery - I don't
+            // 'generated/vendor/**/*.js'
+            'generated/vendor/*.js'
+          ]
+        }
       }
     }
   });
@@ -51,9 +85,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks("grunt-contrib-uglify");
 
-  grunt.registerTask("generate", ["jshint", "babel", "copy"]);
+  grunt.registerTask("generate", ["clean:generated", "jshint", "babel", "copy:generated"]);
   grunt.registerTask("working", ["generate", "watch"]);
-
+  grunt.registerTask("dist", ["generate", "clean:dist", "copy:dist", "uglify:dist"]);
   grunt.registerTask("default", ["generate"]);
 };

@@ -32,12 +32,16 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    clean: {
+      generated: ['generated']
     }
   });
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-contrib-clean");
 
   grunt.registerTask("default", ["jshint", "babel", "copy"]);
 };

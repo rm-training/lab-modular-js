@@ -9,6 +9,12 @@
  * - How will I handle running tasks (Grunt?)
  * - Do I need to set up additional BUILD or DIST folders for compiled and built output?
  *
+ * What will your build flow involve:
+ * - Lint?
+ * - Transpile?
+ * - Copy?
+ * - Clean?
+ *
  * Tip: Don't worry about the final concatenated/uglified "build" step until
  * you have the app fully functional
  *
@@ -33,6 +39,7 @@
  * - json-server or any database/api simulator
  * - http-server (already installed) for your local web server
  * - you can also use jquery, if you prefer, for front-end DOM interactions
+ * - you can also use handlebars to handle templating the items
  *
  * Make it "pretty" and usable
  * - add animations when a user removes an item, or marks it complete
@@ -41,8 +48,37 @@
  * 	-- or messages https://semantic-ui.com/collections/message.html
  */
 
+import moment from 'moment';
+import $ from 'jquery';
+
+import TodoList from './TodoList';
+import TodoItem from './TodoItem';
+
+
 // when a user submits the form
 // then add a new item to the list
+const todoForm = document.querySelector('#todo-form');
+
+todoForm.addEventListener('submit', function(e) {
+	e.preventDefault();
+
+	let description = todoForm.querySelector('input[name=description]');
+	let dueDate = todoForm.querySelector('input[name=due]');
+
+	console.log('Adding', description.value, dueDate.value);
+
+	const item = new TodoItem(description.value, dueDate.vaue);
+	item.save();
+});
+
+const todoList = new TodoList(
+	document.querySelector('#todo-list')
+);
+
+todoList.load();
+
+
+
 
 // get all items from the "database"
 // then populate the list

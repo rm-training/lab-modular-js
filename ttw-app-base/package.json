@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npx http-server generated",
     "server-dist": "npx http-server dist",
+    "server-public": "npx http-server public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

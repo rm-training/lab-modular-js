@@ -30,22 +30,8 @@
       <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </div>
 
-    <!-- build:remove -->
-    <script type="text/javascript" data-main="scripts/app" src="vendor/require.js"></script>
-
-    <!-- configure requirejs so it knows how to look for your modules -->
-    <script>
-      require.config({
-          // start to look for modules by id from here
-          // all path lookups will be relative
-          baseUrl: "scripts",
-          paths: {
-            // unless a module id begins with vendor, then look here...
-            vendor: '../vendor'
-          },
-          waitSeconds: 15
-      });
-    </script>
+    <!-- build:js scripts/optimized.min.js -->
+    <script type="text/javascript" data-main="scripts/main" src="vendor/require.js"></script>
     <!-- /build -->
 
     <!-- build:remove -->

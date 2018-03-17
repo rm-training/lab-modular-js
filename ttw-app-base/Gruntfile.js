@@ -55,29 +55,6 @@ module.exports = function(grunt) {
         spawn: false // faster but error-prone
       }
     },
-    uglify: {
-      dist: {
-        options: {
-          sourceMap: {
-            includeSources: true
-          },
-          mangle: true
-        },
-        files: {
-          'dist/scripts/all.min.js': [
-            // won't cut it because of script dependencies & ordering
-            // generated/scripts/**/*.js'
-            'generated/scripts/logger.js',
-            'generated/scripts/app.js'
-          ],
-          'dist/vendor/all.min.js': [
-            // bootstrap wants jquery - I don't
-            // 'generated/vendor/**/*.js'
-            'generated/vendor/*.js'
-          ]
-        }
-      }
-    },
     processhtml: {
       dist: {
         files: {
@@ -85,6 +62,22 @@ module.exports = function(grunt) {
         }
       },
     },
+    requirejs: {
+      dist: {
+        options: {
+          optimize: 'uglify',
+          baseUrl: 'generated/scripts',
+          paths: {
+            requireLib: '../vendor/require'
+          },
+          mainConfigFile: 'generated/scripts/main.js',
+          name: 'main',
+          out: 'dist/scripts/optimized.min.js',
+          generateSourceMaps: true,
+          includes: ['requireLib']
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
@@ -94,6 +87,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-processhtml");
+  grunt.loadNpmTasks("grunt-contrib-requirejs");
 
   grunt.registerTask("generate", [
     "clean:generated",
@@ -101,13 +95,17 @@ module.exports = function(grunt) {
     "babel",
     "copy:generated"
   ]);
+
   grunt.registerTask("working", ["generate", "watch"]);
+
   grunt.registerTask("dist", [
     "generate",
     "clean:dist",
     "copy:dist",
     "processhtml:dist",
-    "uglify:dist"
+    "requirejs:dist"
   ]);
-grunt.registerTask("default", ["generate"]);
+
+  grunt.registerTask("default", ["generate"]);
+
 };

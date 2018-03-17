@@ -1,4 +1,4 @@
-import * as moment from '../vendor/moment.js';
+import moment from 'moment';
 import logger from './logger.js';
 
 const todayMoment = moment();

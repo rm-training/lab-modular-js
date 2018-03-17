@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
@@ -5,21 +7,6 @@ module.exports = function(grunt) {
         esversion: 6
       },
       src: ["Gruntfile.js", "public/scripts/*.js"]
-    },
-    babel: {
-      options: {
-        sourceMaps: "inline"
-      },
-      generated: {
-        files: [
-          {
-            expand: true, // enables most dyn. stuff
-            cwd: "public/scripts/", // must be a string!
-            src: ["*.js"],
-            dest: "generated/scripts"
-          }
-        ]
-      }
     },
     copy: {
       generated: {
@@ -64,42 +51,60 @@ module.exports = function(grunt) {
           mangle: true
         },
         files: {
-          'dist/scripts/all.min.js': [
-            // won't cut it because of script dependencies & ordering
-            // generated/scripts/**/*.js'
-            'generated/scripts/logger.js',
-            'generated/scripts/app.js'
-          ],
-          'dist/vendor/all.min.js': [
-            // bootstrap wants jquery - I don't
-            // 'generated/vendor/**/*.js'
-            'generated/vendor/*.js'
-          ]
+          'dist/scripts/bundle.min.js': ['generated/scripts/**/*.js']
         }
       }
     },
     processhtml: {
+      generated: {
+        files: {
+          'generated/index.html': ['public/index.html']
+        }
+      },
       dist: {
         files: {
           'dist/index.html': ['generated/index.html']
         }
       },
     },
+    webpack: {
+      generated: {
+        mode: 'development',
+        entry: './public/scripts/app.js',
+        output: {
+          filename: 'bundle.js',
+          path: path.resolve(__dirname, 'generated/scripts')
+        },
+        devtool: 'inline-source-map',
+        module: { // config for all modules
+          rules: [{
+            test: /\.js$/, // which files do I affect
+            loader: 'babel-loader', // and which loader do I put them through
+            query: { // params to my loader
+              presets: ['env']
+            }
+          }]
+        }
+        //watch: false // or true
+     }
+    }
   });
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-babel");
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-processhtml");
+  grunt.loadNpmTasks("grunt-webpack");
 
   grunt.registerTask("generate", [
     "clean:generated",
     "jshint",
-    "babel",
-    "copy:generated"
+    //"babel",
+    "copy:generated",
+    "processhtml:generated",
+    "webpack:generated"
   ]);
   grunt.registerTask("working", ["generate", "watch"]);
   grunt.registerTask("dist", [

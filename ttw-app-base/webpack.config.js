@@ -7,5 +7,14 @@ module.exports = {
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'generated/scripts')
+	},
+	module: { // config for all modules
+		rules: [{
+			test: /\.js$/, // which files do I affect
+			loader: 'babel-loader', // and which loader do I put them through
+			query: { // params to my loader
+				presets: ['env']
+			}
+		}]
 	}
 };

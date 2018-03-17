@@ -1,4 +1,4 @@
-const logger = (function() {
+define('logger', function() {
 
 	/**
 	 * @param  {...array}
@@ -33,5 +33,5 @@ const logger = (function() {
 		logGrouped
 	};
 
-})();
+});
 

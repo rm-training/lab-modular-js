@@ -30,19 +30,26 @@
       <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </div>
 
-    <!-- vendor scripts -->
-    <!-- build:js vendor/all.min.js -->
-    <script type="text/javascript" src="vendor/moment.js"></script>
-    <!-- /build -->
+    <!-- build:remove -->
+    <script type="text/javascript" data-main="scripts/app" src="vendor/require.js"></script>
 
-    <!-- app scripts -->
-    <!-- build:js scripts/all.min.js -->
-    <script type="text/javascript" src="scripts/logger.js"></script>
-    <script type="text/javascript" src="scripts/app.js"></script>
+    <!-- configure requirejs so it knows how to look for your modules -->
+    <script>
+      require.config({
+          // start to look for modules by id from here
+          // all path lookups will be relative
+          baseUrl: "scripts",
+          paths: {
+            // unless a module id begins with vendor, then look here...
+            vendor: '../vendor'
+          },
+          waitSeconds: 15
+      });
+    </script>
     <!-- /build -->
 
     <!-- build:remove -->
-    <script src="//localhost:35729/livereload.js"></script>
+    <!--<script src="//localhost:35729/livereload.js"></script>-->
     <!-- /build -->
   </body>
 </html>

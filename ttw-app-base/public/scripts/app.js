@@ -1,4 +1,4 @@
-(function(moment, logger) {
+define('app', ['vendor/moment', 'logger'], function(moment, logger) {
 
   const todayMoment = moment();
 
@@ -60,4 +60,4 @@
 
   updateEmotion();
 
-})(moment, logger);
+});

@@ -65,7 +65,7 @@ todoForm.addEventListener('submit', function(e) {
 	let description = todoForm.querySelector('input[name=description]');
 	let dueDate = todoForm.querySelector('input[name=due]');
 
-	console.log('Adding', description.value, dueDate.value);
+	console.log('Adding New Item', description.value, dueDate.value);
 
 	const item = new TodoItem(description.value, dueDate.vaue);
 	item.save();

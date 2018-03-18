@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 						path: path.resolve(__dirname, "generated/js")
 					},
 					devtool: "inline-source-map",
-					watch: false
+					watch: true
 				}
 			)
 		},
@@ -30,12 +30,15 @@ module.exports = function(grunt) {
 		        dest: 'generated/'
 		     }]
 		  }
+		},
+		clean: {
+			generated: ['generated']
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-webpack');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
-
-	grunt.registerTask("default", ['copy', 'webpack']);
+	grunt.registerTask("default", ['clean', 'copy', 'webpack']);
 };

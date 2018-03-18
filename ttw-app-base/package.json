@@ -6,7 +6,9 @@
   "scripts": {
     "start": "npx http-server generated",
     "server-dist": "npx http-server dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "parcel-generated": "npx parcel watch index.html --out-dir generated",
+    "parcel-build": "npx parcel build public/index.html --out-dir dist --public-url ./ --no-cache --out-file index.html"
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +23,10 @@
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-exec": "^3.0.0",
     "grunt-processhtml": "^0.4.1",
-    "http-server": "^0.11.1"
+    "http-server": "^0.11.1",
+    "parcel-bundler": "^1.6.2"
   },
   "dependencies": {
     "moment": "^2.21.0"

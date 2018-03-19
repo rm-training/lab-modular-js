@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Warm up</title>
+   <link rel="stylesheet" href="../milligram.css">
+</head>
+<body>
+
+   <!-- Remember, you're not allowed to change the HTML! -->
+   <div class="container" style="margin-top:10vh">
+      <h1>Good Morning!</h1>
+      <p>Without editing the HTML directly -- implement the script per the requirements. Check the script comments for details.</p>
+
+      <form action="https://www.google.com">
+        <input type="text" name="q" id="new-text"/>
+        <input type="submit" value="Change" id="the-button"/>
+      </form>
+
+      <ul id="history"></ul>
+
+   </div>
+
+   <script>
+     /*
+      * Use Case:
+      *
+      * 1. User clicks on the "Change" button.
+      *
+      * 2. If the text input is blank then nothing changes.
+      *
+      * 3. Otherwise the contents of the <h1> element are replaced with the contents
+      *    of the text input.
+      *
+      * 4. And the text input is cleared.
+      *
+      * 5. The user remains on the page in both cases.
+      *
+      * HINTS:
+      *    get/checking input values
+      *      var inputEl = document.getElementById('new-text');
+      *      inputEl.value; // ?
+      *    handling input change events
+      *      el.addEventListener('change', function(e) {});
+      *    preventing a form from submitting (the default browser behavior)
+      *      e.preventDefault();
+      **/
+
+      var changeButton = document.getElementById('the-button');
+      var inputField = document.getElementById('new-text');
+      var header = document.querySelector('h1');
+
+      var historyList = document.getElementById('history');
+
+      changeButton.addEventListener('click', function(e) {
+        var newLi;
+        var inputValue = inputField.value;
+
+        if (inputValue) {
+          header.innerHTML = inputValue;
+          inputField.value = '';
+
+          // bonus 1:
+          newLi = document.createElement('li');
+          newLi.innerHTML = inputValue;
+          historyList.appendChild(newLi);
+
+          // bonus 2:
+          newLi.addEventListener('click', function(e) {
+            header.innerHTML = this.innerHTML;
+          });
+        }
+
+        e.preventDefault();
+
+      });
+
+      /*
+      *
+      * BONUS 1:
+      *
+      * Before step 3 above: Save the current text content of the <h1>
+      * element by creating an <li> element.  Set the text content of the
+      * <li> element to the text content of the <h1> element.  Find the
+      * <ul> element with the ID of "history" and insert the new <li>
+      * element as its first child.  Therefore, each time the <h1>
+      * element is changed, its current value is prepended to the <ul>
+      * element.
+      */
+
+      /*
+      * BONUS 2:
+      *
+      * If one of the <li> elements inside the <ul> element from bonus 1
+      * is clicked, update the text content of the <h1> element with the
+      * text content of the clicked <li> element.
+      */
+
+      // write solution
+
+   </script>
+</body>

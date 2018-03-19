@@ -1,5 +1,5 @@
 // Write an expression using higher-order array methods
-// filter, reduce, map
+//  #filter, #reduce or #map
 // to compute the total value of the machines in the inventory array.
 
 const inventory = [

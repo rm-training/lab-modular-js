@@ -9,7 +9,3 @@ function addOneToAll(...args) {
 };
 
 addOneToAll(1,2,3,4,5);
-
-// update the function to use reduce
-
-// update the function to destructure an array that is passed in

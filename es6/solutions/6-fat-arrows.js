@@ -6,7 +6,7 @@
 // no: function declaration should not be converted to an arrow
 // arrow functions are not hoisted
 one();
-function () {
+function one () {
 	console.log('I am a function declaration');
 }
 
@@ -51,8 +51,9 @@ Row.resortRows = (rows) => {
 // no: you can't switch this because context matters
 // you could switch a STATIC method, however
 Row.prototype.render = function() {
-	this.data.forEach(function(col) {
-		console.log('I am rendering', col);
+	// yes! this is a perfect place for it
+	this.data.forEach((col) => {
+		console.log('Row', this.id, 'Col', col);
 	});
 }
 
@@ -60,3 +61,4 @@ Row.prototype.render = function() {
 const rowOne = new Row(table, 1, [1,2,3]);
 table.addRow(rowOne);
 table.removeRow(rowOne);
+rowOne.render();

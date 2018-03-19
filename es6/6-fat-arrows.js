@@ -1,7 +1,13 @@
-// convert the functions to arrow-function format
-// where appropriate
+// Arrow functions offer short syntax and a static context
+// they are NOT a drop-in replacement for plain function declarations/statements.
+//
+// Your assignment:
+// Convert the functions to arrow-function format where appropriate
 
+//
 // Part 1
+//
+//
 
 one();
 
@@ -15,7 +21,15 @@ const two = function () {
 
 two();
 
+// HEY THERE!
+// WHEN YOU ARE READY TO MOVE TO THE NEXT PART
+// REMOVE THIS RETURN STATEMENT
+return;
+
+//
 // Part 2
+//
+//
 
 const table = {
 	id: 1,
@@ -43,13 +57,14 @@ Row.resortRows = function(rows) {
 
 // inherited method(s)
 Row.prototype.render = function() {
+	const self = this;
 	this.data.forEach(function(col) {
-		console.log('I am rendering', col);
+		console.log('Row', this.id, 'Col', col);
 	});
 }
 
 // testing
 const rowOne = new Row(table, 1, [1,2,3]);
-
 table.addRow(rowOne);
 table.removeRow(rowOne);
+rowOne.render();

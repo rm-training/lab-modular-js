@@ -1,4 +1,6 @@
-
+// this function will determine the last index {i} where
+// a value exists in the array -- starting at the end of the array
+//
 // It would be nice to be able to call our `lastIndexOf` function
 // without providing the third argument, and have it default
 //  to starting at the end of the array.

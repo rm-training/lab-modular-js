@@ -24,7 +24,7 @@ Solving and converting to ES6 syntax
 Test by simply running the script through node:
 
 ```
-$> node 1-block-scope
+node es6/1-block-scope
 ```
 
 Or copy & past into jsFiddle

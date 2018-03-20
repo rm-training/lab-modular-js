@@ -1,6 +1,20 @@
 # Modular JS Exercises and Examples# 
 
-## Warmup (On Fiddle) ##
+## Warmup ##
+
+There is a simple warm up exercise found in the `/warmup` folder. 
+
+NPM install to install dependencies:
+
+```
+npm install
+```
+
+And then start to run the built-in server
+
+```
+npm start
+```
 
 ## ES6 Exercises ##
 

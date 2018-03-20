@@ -7,3 +7,12 @@ It includes a custom logging system which formats and logs output to the console
 It is styled with Bootstrap, though it does not use any Bootstrap JavaScript -- native ftw!
 
 It uses momentjs to handle time and date dealings.
+
+Getting started
+=====
+
+Initialize
+
+```
+npm init
+```

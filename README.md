@@ -1,8 +1,8 @@
-Modular JS Exercises and Examples
+# Modular JS Exercises and Examples# 
 
-1. Warmup (On Fiddle)
+## Warmup (On Fiddle) ##
 
-2. ES6 Exercises
+## ES6 Exercises ##
 
 Work through the exercises in `/es6`
 Solving and converting to ES6 syntax
@@ -15,7 +15,7 @@ $> node 1-block-scope
 
 Or copy & past into jsFiddle
 
-3. TTW App - Time to weekend
+## TTW App - Time to weekend ##
 
 The `ttw-app-base` folder has the starting point for the grunt setup exercises.
 
@@ -31,11 +31,11 @@ There are a few additional branches you can view that have alternative  approach
 * `timer-app-parcel-bundler`
 * `timer-app-webpack`
 
-4. ToDo App
+## ToDo App ##
 
 For our final lab we'll build out a ToDo application using ES6 syntax and modules.
 
-The todo app exists in `/todo-app-base`
+The todo app exists in `/todo-app-base` where all the HTML and css if you prefer not to write that yourself.
 
 The best branch to start from is:
 
@@ -47,11 +47,8 @@ We'll rely on a task runner and some transformation tools to help us take care o
 * Bundler: Parcel? Webpack?
 * Transpiler: Babel - but, with Grunt or Webpack?
 
-	There is a starting point set up in todo-app-base. It has all the HTML and css if you prefer not to write that yourself.
+Other branches related to this project are:
 
-	Other branches related to this project are:
-
-		- todo-app-start-point
-		- todo-app-wip
+* `todo-app-wip`
 
 

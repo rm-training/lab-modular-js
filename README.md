@@ -1,4 +1,4 @@
-# Modular JS Exercises and Examples# 
+# Modular JS Exercises and Examples # 
 
 ## Warmup ##
 

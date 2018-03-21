@@ -1,0 +1,16 @@
+{
+  "name": "es6",
+  "version": "0.0.1",
+  "description": "Just some ES6 tests",
+  "main": "1-block-scope-1.js",
+  "scripts": {
+    "build": "npx babel solutions --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}

@@ -9,11 +9,23 @@ module.exports = {
 		path: path.resolve(__dirname, 'generated/scripts')
 	},
 	module: { // config for all modules
+		// rules: [{
+		// 	test: /\.js$/, // which files do I affect
+		// 	loader: 'babel-loader', // and which loader do I put them through
+		// 	query: { // params to my loader
+		// 		presets: ['env']
+		// 	}
+		// }]
 		rules: [{
 			test: /\.js$/, // which files do I affect
-			loader: 'babel-loader', // and which loader do I put them through
-			query: { // params to my loader
-				presets: ['env']
+			exclude: /(node_modules)/,
+			use: {
+				loader: 'babel-loader', // and which loader do I put them through
+				options: {
+					presets: [
+						'env'
+					]
+				}
 			}
 		}]
 	}

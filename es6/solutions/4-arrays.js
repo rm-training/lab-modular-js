@@ -13,10 +13,14 @@ const inventory = [
 let totalMachineValue = 0;
 
 // YOUR CODE HERE
-totalMachineValue = inventory.reduce((acc, curr) => {
-	return acc+curr.value;
-}, 0);
+totalMachineValue = inventory
+	.filter((element) => {
+		return element.type === "machine";
+	})
+	.reduce((acc, curr) => {
+		return acc+curr.value;
+	}, 0);
 // END YOUR CODE
 
 console.log(totalMachineValue);
-console.assert(totalMachineValue === 6937);
+console.assert(totalMachineValue === 5727);

@@ -20,11 +20,31 @@ module.exports = function(grunt) {
 					}
 				]
 			}
+		},
+		copy: {
+			generated: {
+				files: [{
+					expand: true,
+					cwd: 'public/',
+					src: ['**/*', '!scripts/*'],
+					dest: 'generated/'
+				}]
+			}
 		}
 	});
 
 	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks('grunt-babel');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
-	grunt.registerTask("default", ["jshint", "babel"]);
+	grunt.registerTask("default", [
+		"generate"
+	]);
+
+	grunt.registerTask("generate", [
+		"jshint",
+		"babel",
+		"copy"
+	]);
+
 };
